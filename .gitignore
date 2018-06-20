@@ -63,3 +63,6 @@ typings/
 # IDEs
 .idea/
 .vscode/
+
+# compiled js
+dist/
