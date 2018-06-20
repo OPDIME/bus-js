@@ -1,0 +1,36 @@
+{
+  "name": "bus",
+  "version": "0.1.0",
+  "description": "A JavaScript implementation of an Event-Bus.",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc",
+    "build-watch": "tsc --watch",
+    "lint": "tslint --project .",
+    "start": "nodemon"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/opdime/bus-js.git"
+  },
+  "keywords": [
+    "EventBus",
+    "SubPub"
+  ],
+  "author": "Jörn Neumeyer",
+  "license": "Unlicense",
+  "bugs": {
+    "url": "https://github.com/opdime/bus-js/issues"
+  },
+  "homepage": "https://github.com/opdime/bus-js#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^23.1.1",
+    "jest": "^23.1.0",
+    "nodemon": "^1.17.5",
+    "ts-jest": "^22.4.6",
+    "tslint": "^5.10.0",
+    "typescript": "^2.9.2"
+  }
+}
