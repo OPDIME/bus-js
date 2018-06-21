@@ -1,4 +1,4 @@
 export interface IBusMessage {
-  readonly channel: string;
+  readonly channel?: string;
   readonly payload: any;
 }
