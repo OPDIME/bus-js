@@ -4,7 +4,7 @@
   "description": "A JavaScript implementation of an Event-Bus.",
   "main": "dist/index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --watchAll",
     "build": "tsc",
     "build-watch": "tsc --watch",
     "lint": "tslint --project .",
@@ -27,6 +27,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^23.1.1",
+    "@types/node": "^10.3.4",
     "jest": "^23.1.0",
     "nodemon": "^1.17.5",
     "ts-jest": "^22.4.6",
