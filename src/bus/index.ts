@@ -60,22 +60,18 @@ export class Bus {
     return Bus.getChannelBusOrCreate(channel);
   }
 
-  public static subscribe(channel: string, subscriber?: BusSubscriber): Bus {
+  public static subscribe(subscriber: BusSubscriber, channel: string = '*') {
     const bus = Bus.getChannelBusOrCreate(channel);
     if (subscriber) {
       bus.subscribe(subscriber);
     }
-
-    return bus;
   }
 
-  public static unsubscribe(channel: string, subscriber: BusSubscriber): (Bus) {
+  public static unsubscribe(subscriber: BusSubscriber, channel: string = '*') {
     const bus = Bus.getChannelBusOrCreate(channel);
     if (subscriber) {
       bus.unsubscribe(subscriber);
     }
-
-    return bus;
   }
 
   public static publish(message: IBusMessage) {
