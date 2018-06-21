@@ -1,5 +1,5 @@
-import { IBusMessage } from '../bus-message';
-import { BusSubscriber } from '../bus-subscriber';
+import { IBusMessage } from './bus-message';
+import { BusSubscriber } from './bus-subscriber';
 
 export class Bus {
   private static busses: { [k: string]: (Bus | undefined) } = { };
