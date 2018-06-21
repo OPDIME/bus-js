@@ -1,2 +1,7 @@
 # typescript sources
 src/
+
+# IDEs
+.idea/
+.vscode/
+.vs/
