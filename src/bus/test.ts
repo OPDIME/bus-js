@@ -1,4 +1,4 @@
 // TODO
 describe('bus', () => {
-  // a
+  fail('has no tests');
 });
