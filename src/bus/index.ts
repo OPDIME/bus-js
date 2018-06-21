@@ -1,4 +1,4 @@
-import IBusMessage from '../bus-message';
+import { IBusMessage } from '../bus-message';
 import { BusSubscriber } from '../bus-subscriber';
 
 export class Bus {
@@ -14,7 +14,9 @@ export class Bus {
   }
 
   public subscribe(subscriber: BusSubscriber): Bus {
-    this.subscribers.push(subscriber);
+    if (!this.subscribers.includes(subscriber)) {
+      this.subscribers.push(subscriber);
+    }
 
     return this;
   }
@@ -26,10 +28,12 @@ export class Bus {
     return this;
   }
 
-  public publish(message: IBusMessage) {
+  public publish(message: IBusMessage): Bus {
     for (const subscriber of this.subscribers) {
       subscriber(message);
     }
+
+    return this;
   }
 
   private static registerBus(channel: string): Bus {
@@ -43,25 +47,39 @@ export class Bus {
     return Bus.busses[channel];
   }
 
-  public static subscribe(channel: string, subscriber: BusSubscriber) {
-    let bus = Bus.getChannelBus(channel);
+  public static getChannelBusOrCreate(channel: string): Bus {
+    const bus = Bus.busses[channel];
     if (bus === undefined) {
-      bus = Bus.registerBus(channel);
+      return Bus.registerBus(channel);
     }
-    bus.subscribe(subscriber);
+
+    return bus;
   }
 
-  public static unsubscribe(channel: string, subscriber: BusSubscriber) {
-    const bus = Bus.getChannelBus(channel);
-    if (bus !== undefined) {
+  public static channel(channel: string): Bus {
+    return Bus.getChannelBusOrCreate(channel);
+  }
+
+  public static subscribe(channel: string, subscriber?: BusSubscriber): Bus {
+    const bus = Bus.getChannelBusOrCreate(channel);
+    if (subscriber) {
+      bus.subscribe(subscriber);
+    }
+
+    return bus;
+  }
+
+  public static unsubscribe(channel: string, subscriber: BusSubscriber): (Bus) {
+    const bus = Bus.getChannelBusOrCreate(channel);
+    if (subscriber) {
       bus.unsubscribe(subscriber);
     }
+
+    return bus;
   }
 
   public static publish(message: IBusMessage) {
-    const bus = Bus.getChannelBus(message.channel);
-    if (bus) {
-      bus.publish(message);
-    }
+    const bus = Bus.getChannelBusOrCreate(message.channel);
+    bus.publish(message);
   }
 }
