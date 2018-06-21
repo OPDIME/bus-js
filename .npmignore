@@ -1,5 +1,8 @@
-# typescript sources
+# dev files
 src/
+jest.config.js
+.gitignore
+nodemon.json
 
 # IDEs
 .idea/
