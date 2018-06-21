@@ -4,6 +4,8 @@ import { BusSubscriber } from '../bus-subscriber';
 export class Bus {
   private static busses: { [k: string]: (Bus | undefined) } = { };
   private subscribers: Array<BusSubscriber> = [];
+  // the channel, which receives all messages
+  public static readonly ALL_CHANNEL = '*';
 
   constructor(
     private channel: string
@@ -47,7 +49,7 @@ export class Bus {
     return Bus.busses[channel];
   }
 
-  public static getChannelBusOrCreate(channel: string): Bus {
+  public static getChannelBusOrCreate(channel: string = Bus.ALL_CHANNEL): Bus {
     const bus = Bus.busses[channel];
     if (bus === undefined) {
       return Bus.registerBus(channel);
@@ -60,14 +62,20 @@ export class Bus {
     return Bus.getChannelBusOrCreate(channel);
   }
 
-  public static subscribe(subscriber: BusSubscriber, channel: string = '*') {
+  public static subscribe(
+    subscriber: BusSubscriber,
+    channel: string = Bus.ALL_CHANNEL
+  ) {
     const bus = Bus.getChannelBusOrCreate(channel);
     if (subscriber) {
       bus.subscribe(subscriber);
     }
   }
 
-  public static unsubscribe(subscriber: BusSubscriber, channel: string = '*') {
+  public static unsubscribe(
+    subscriber: BusSubscriber,
+    channel: string = Bus.ALL_CHANNEL
+  ) {
     const bus = Bus.getChannelBusOrCreate(channel);
     if (subscriber) {
       bus.unsubscribe(subscriber);
@@ -75,7 +83,13 @@ export class Bus {
   }
 
   public static publish(message: IBusMessage) {
-    const bus = Bus.getChannelBusOrCreate(message.channel);
-    bus.publish(message);
+    if (message.channel) {
+      Bus
+        .getChannelBusOrCreate(message.channel)
+        .publish(message);
+    }
+    Bus
+      .getChannelBusOrCreate(Bus.ALL_CHANNEL)
+      .publish(message);
   }
 }
