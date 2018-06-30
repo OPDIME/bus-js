@@ -57,25 +57,25 @@ export class BusManager {
     return BusManager.channel(BusManager.ALL_CHANNEL);
   }
 
-  /**
-   * Subscribe to the global channel or a specified channel.
-   */
-  public static subscribe(subscriber: BusSubscriber, channel: string) {
-    const bus = BusManager.channel(channel);
-    if (subscriber) {
-      bus.subscribe(subscriber);
-    }
-  }
+  // /**
+  //  * Subscribe to the global channel or a specified channel.
+  //  */
+  // public static subscribe(subscriber: BusSubscriber, channel: string) {
+  //   const bus = BusManager.channel(channel);
+  //   if (subscriber) {
+  //     bus.subscribe(subscriber);
+  //   }
+  // }
 
-  /**
-   * Unsubscribe to the global channel or a specified channel.
-   */
-  public static unsubscribe(subscriber: BusSubscriber, channel: string) {
-    const bus = BusManager.channel(channel);
-    if (subscriber) {
-      bus.unsubscribe(subscriber);
-    }
-  }
+  // /**
+  //  * Unsubscribe to the global channel or a specified channel.
+  //  */
+  // public static unsubscribe(subscriber: BusSubscriber, channel: string) {
+  //   const bus = BusManager.channel(channel);
+  //   if (subscriber) {
+  //     bus.unsubscribe(subscriber);
+  //   }
+  // }
 
   /**
    * Publish a message to the global bus and the specified bus.
