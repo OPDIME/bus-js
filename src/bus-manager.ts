@@ -34,7 +34,7 @@ export class BusManager {
     subscriber: BusSubscriber,
     channel: string = Bus.ALL_CHANNEL
   ) {
-    const bus = BusManager.getChannelBusOrCreate(channel);
+    const bus = BusManager.channel(channel);
     if (subscriber) {
       bus.subscribe(subscriber);
     }
@@ -44,7 +44,7 @@ export class BusManager {
     subscriber: BusSubscriber,
     channel: string = Bus.ALL_CHANNEL
   ) {
-    const bus = BusManager.getChannelBusOrCreate(channel);
+    const bus = BusManager.channel(channel);
     if (subscriber) {
       bus.unsubscribe(subscriber);
     }
@@ -53,11 +53,11 @@ export class BusManager {
   public static publish(message: IBusMessage) {
     if (message.channel) {
       BusManager
-        .getChannelBusOrCreate(message.channel)
+        .channel(message.channel)
         .publish(message);
     }
     BusManager
-      .getChannelBusOrCreate(Bus.ALL_CHANNEL)
+      .channel(Bus.ALL_CHANNEL)
       .publish(message);
   }
 }
