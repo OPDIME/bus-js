@@ -8,10 +8,10 @@ export class Bus {
   public static readonly ALL_CHANNEL = '*';
 
   constructor(
-    private channel: string
+    private channel?: string
   ) { }
 
-  public getChannel(): string {
+  public getChannel(): string | undefined {
     return this.channel;
   }
 
