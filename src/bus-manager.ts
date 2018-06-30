@@ -19,9 +19,7 @@ export class BusManager {
     return BusManager.busses[channel];
   }
 
-  public static getChannelBusOrCreate(
-    channel: string = BusManager.ALL_CHANNEL
-  ): Bus {
+  public static getChannelBusOrCreate(channel: string): Bus {
     const bus = BusManager.busses[channel];
     if (bus === undefined) {
       return BusManager.registerBus(channel);
