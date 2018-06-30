@@ -60,10 +60,7 @@ export class BusManager {
   /**
    * Subscribe to the global channel or a specified channel.
    */
-  public static subscribe(
-    subscriber: BusSubscriber,
-    channel: string = BusManager.ALL_CHANNEL
-  ) {
+  public static subscribe(subscriber: BusSubscriber, channel: string) {
     const bus = BusManager.channel(channel);
     if (subscriber) {
       bus.subscribe(subscriber);
@@ -73,10 +70,7 @@ export class BusManager {
   /**
    * Unsubscribe to the global channel or a specified channel.
    */
-  public static unsubscribe(
-    subscriber: BusSubscriber,
-    channel: string = BusManager.ALL_CHANNEL
-  ) {
+  public static unsubscribe(subscriber: BusSubscriber, channel: string) {
     const bus = BusManager.channel(channel);
     if (subscriber) {
       bus.unsubscribe(subscriber);
