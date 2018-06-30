@@ -1,6 +1,6 @@
 import { Bus } from './bus';
 import { IBusMessage } from './bus-message';
-import { BusSubscriber } from './bus-subscriber';
+// import { BusSubscriber } from './bus-subscriber';
 
 // tslint:disable:no-unnecessary-class
 export class BusManager {
