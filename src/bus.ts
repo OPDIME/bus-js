@@ -4,8 +4,6 @@ import { BusSubscriber } from './bus-subscriber';
 
 export class Bus {
   private subscribers: Array<BusSubscriber> = [];
-  // the channel, which receives all messages
-  public static readonly ALL_CHANNEL = '*';
 
   constructor(
     private channel?: string

@@ -4,6 +4,8 @@ import { BusSubscriber } from './bus-subscriber';
 
 // tslint:disable:no-unnecessary-class
 export class BusManager {
+  // the channel, which receives all messages
+  public static readonly ALL_CHANNEL = '*';
   private static busses: { [k: string]: (Bus | undefined) } = { };
 
   private static registerBus(channel: string): Bus {
@@ -17,7 +19,9 @@ export class BusManager {
     return BusManager.busses[channel];
   }
 
-  public static getChannelBusOrCreate(channel: string = Bus.ALL_CHANNEL): Bus {
+  public static getChannelBusOrCreate(
+    channel: string = BusManager.ALL_CHANNEL
+  ): Bus {
     const bus = BusManager.busses[channel];
     if (bus === undefined) {
       return BusManager.registerBus(channel);
@@ -30,9 +34,13 @@ export class BusManager {
     return BusManager.getChannelBusOrCreate(channel);
   }
 
+  public static channelAll(): Bus {
+    return BusManager.channel(BusManager.ALL_CHANNEL);
+  }
+
   public static subscribe(
     subscriber: BusSubscriber,
-    channel: string = Bus.ALL_CHANNEL
+    channel: string = BusManager.ALL_CHANNEL
   ) {
     const bus = BusManager.channel(channel);
     if (subscriber) {
@@ -42,7 +50,7 @@ export class BusManager {
 
   public static unsubscribe(
     subscriber: BusSubscriber,
-    channel: string = Bus.ALL_CHANNEL
+    channel: string = BusManager.ALL_CHANNEL
   ) {
     const bus = BusManager.channel(channel);
     if (subscriber) {
@@ -57,7 +65,7 @@ export class BusManager {
         .publish(message);
     }
     BusManager
-      .channel(Bus.ALL_CHANNEL)
+      .channel(BusManager.ALL_CHANNEL)
       .publish(message);
   }
 }
