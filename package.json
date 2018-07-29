@@ -23,6 +23,23 @@
   "bugs": {
     "url": "https://github.com/opdime/bus-js/issues"
   },
+  "jest": {
+    "roots": [
+      "./src"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.tsx?$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  },
   "homepage": "https://github.com/opdime/bus-js#readme",
   "dependencies": {},
   "devDependencies": {
